@@ -7,6 +7,7 @@ members = [
     "geodude_assets",
     "mj_environment",
     "mj_manipulator",
+    "mj_manipulator_ros",
     "prl_assets",
     "pycbirrt",
     "tsr",

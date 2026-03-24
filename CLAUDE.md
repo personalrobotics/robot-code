@@ -10,6 +10,7 @@ Setup: `git clone https://github.com/siddhss5/robot-code && ./setup.sh`
 | `geodude/` | siddhss5/geodude | Main robot control, planning, execution |
 | `geodude_assets/` | personalrobotics/geodude_assets | MuJoCo models for Geodude (UR5e + Robotiq) |
 | `mj_manipulator/` | siddhss5/mj_manipulator | Generic arm control: planning, execution, Cartesian control, grasping |
+| `mj_manipulator_ros/` | siddhss5/mj_manipulator_ros | Generic ROS 2 bridge: HardwareContext, mock node, trajectory conversion |
 | `mj_environment/` | personalrobotics/mj_environment | MuJoCo environment wrapper |
 | `prl_assets/` | personalrobotics/prl_assets | Reusable objects (cans, bins) |
 | `pycbirrt/` | personalrobotics/pycbirrt | CBiRRT motion planner with TSR constraints |
