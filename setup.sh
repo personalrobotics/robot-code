@@ -6,11 +6,11 @@ set -euo pipefail
 
 REPOS=(
     "https://github.com/personalrobotics/asset_manager"
-    "https://github.com/siddhss5/geodude"
+    "https://github.com/personalrobotics/geodude"
     "https://github.com/personalrobotics/geodude_assets"
     "https://github.com/personalrobotics/mj_environment"
-    "https://github.com/siddhss5/mj_manipulator"
-    "https://github.com/siddhss5/mj_manipulator_ros"
+    "https://github.com/personalrobotics/mj_manipulator"
+    "https://github.com/personalrobotics/mj_manipulator_ros"
     "https://github.com/personalrobotics/prl_assets"
     "https://github.com/personalrobotics/pycbirrt"
     "https://github.com/personalrobotics/tsr"

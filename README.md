@@ -2,12 +2,12 @@
 
 Multi-project workspace for MuJoCo-based robot manipulation research. A curated set of focused libraries that compose into a full stack — from low-level joint control to high-level pick-and-place with behavior trees.
 
-Built for the [Geodude](https://github.com/siddhss5/geodude) bimanual robot (dual UR5e + Robotiq 2F-140), but the core libraries (`mj_manipulator`, `pycbirrt`, `tsr`) are robot-agnostic and work with any MuJoCo arm.
+Built for the [Geodude](https://github.com/personalrobotics/geodude) bimanual robot (dual UR5e + Robotiq 2F-140), but the core libraries (`mj_manipulator`, `pycbirrt`, `tsr`) are robot-agnostic and work with any MuJoCo arm.
 
 ## Quick Start
 
 ```bash
-git clone https://github.com/siddhss5/robot-code
+git clone https://github.com/personalrobotics/robot-code
 cd robot-code
 ./setup.sh        # clones all repos, runs uv sync
 ```
@@ -58,9 +58,9 @@ uv run mjpython geodude/examples/recycle.py --headless --cycles 3
 
 | Package | Description |
 |---------|-------------|
-| [geodude](https://github.com/siddhss5/geodude) | Bimanual robot: high-level API (`robot.pickup()`, `robot.place()`), Vention bases, behavior trees |
-| [mj_manipulator](https://github.com/siddhss5/mj_manipulator) | Generic arm control: planning, trajectory execution, Cartesian control, grasp-aware collision |
-| [mj_manipulator_ros](https://github.com/siddhss5/mj_manipulator_ros) | **WIP** — ROS 2 bridge: `HardwareContext`, MuJoCo mock node, trajectory conversion (requires system ROS 2) |
+| [geodude](https://github.com/personalrobotics/geodude) | Bimanual robot: high-level API (`robot.pickup()`, `robot.place()`), Vention bases, behavior trees |
+| [mj_manipulator](https://github.com/personalrobotics/mj_manipulator) | Generic arm control: planning, trajectory execution, Cartesian control, grasp-aware collision |
+| [mj_manipulator_ros](https://github.com/personalrobotics/mj_manipulator_ros) | **WIP** — ROS 2 bridge: `HardwareContext`, MuJoCo mock node, trajectory conversion (requires system ROS 2) |
 | [pycbirrt](https://github.com/personalrobotics/pycbirrt) | CBiRRT motion planner with TSR constraints |
 | [tsr](https://github.com/personalrobotics/tsr) | Task Space Regions for grasp/place planning |
 | [mj_environment](https://github.com/personalrobotics/mj_environment) | MuJoCo environment wrapper with object registry |
@@ -95,7 +95,7 @@ All packages are installed as editable in a shared `.venv`. Changes in any packa
 Each package is independently installable outside the workspace:
 
 ```bash
-uv add mj-manipulator @ git+https://github.com/siddhss5/mj_manipulator
+uv add mj-manipulator @ git+https://github.com/personalrobotics/mj_manipulator
 ```
 
 See each package's README for its standalone API.
@@ -116,8 +116,8 @@ uv run pytest */tests/ -v
 
 ### Adding a new arm
 
-`mj_manipulator` supports any MuJoCo arm. See [Adding a New Arm](https://github.com/siddhss5/mj_manipulator#adding-a-new-arm) for the full guide. Pre-built: UR5e (6-DOF) and Franka Panda (7-DOF).
+`mj_manipulator` supports any MuJoCo arm. See [Adding a New Arm](https://github.com/personalrobotics/mj_manipulator#adding-a-new-arm) for the full guide. Pre-built: UR5e (6-DOF) and Franka Panda (7-DOF).
 
 ### Real hardware (ROS 2)
 
-**Work in progress.** `mj_manipulator_ros` provides `HardwareContext` — the same `ExecutionContext` protocol backed by ROS 2 action servers. Scaffolded but not yet tested end-to-end. Requires system ROS 2 on Ubuntu. See [geodude#91](https://github.com/siddhss5/geodude/issues/91) for the setup guide and architecture.
+**Work in progress.** `mj_manipulator_ros` provides `HardwareContext` — the same `ExecutionContext` protocol backed by ROS 2 action servers. Scaffolded but not yet tested end-to-end. Requires system ROS 2 on Ubuntu. See [geodude#91](https://github.com/personalrobotics/geodude/issues/91) for the setup guide and architecture.
