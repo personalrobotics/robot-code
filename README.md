@@ -106,7 +106,8 @@ See each package's README for its standalone API.
 # Run tests for a specific package
 cd geodude && uv run pytest tests/ -v
 
-# Run a demo with the MuJoCo viewer
+# Run a demo with the MuJoCo viewer (kinematic or physics)
+uv run mjpython geodude/examples/recycle.py
 uv run mjpython geodude/examples/recycle.py --physics
 
 # Run all tests across the workspace
