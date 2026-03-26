@@ -12,17 +12,12 @@ cd robot-code
 ./setup.sh        # clones all repos, runs uv sync
 ```
 
-Verify the stack end-to-end:
+Launch the interactive console:
 
 ```bash
-# Cartesian control demo (UR5e + Franka, no viewer)
-uv run python mj_manipulator/demos/cartesian_control.py
-
-# Recycling demo with viewer
-uv run mjpython geodude/examples/recycle.py --physics
-
-# Headless (CI-friendly)
-uv run mjpython geodude/examples/recycle.py --headless --cycles 3
+geodude --demo recycling                 # headless console
+geodude --list-demos                     # see available demos
+uv run mjpython -m geodude --demo recycling --viewer   # with MuJoCo viewer
 ```
 
 ## Architecture
@@ -102,36 +97,54 @@ See each package's README for its standalone API.
 
 ## Interactive Console
 
-IPython REPL with tab completion, introspection, and LLM-powered natural language control:
-
-```bash
-# Install chat dependencies
-uv sync --extra chat
-
-# Launch the console (kinematic mode)
-uv run python geodude/examples/console.py --preset recycling
-
-# With physics simulation and MuJoCo viewer
-uv run mjpython geodude/examples/console.py --physics --viewer --preset recycling
-```
+The primary way to interact with Geodude. IPython REPL with tab completion, introspection, and optional LLM-powered natural language control.
 
 ```python
 In [1]: robot.find_objects()
 Out[1]: ['can_0', 'can_1', 'can_2', 'potted_meat_can_0']
 
-In [2]: robot.pickup("can_0")       # pick up a specific object
-In [3]: robot.place("recycle_bin")   # place in any bin
+In [2]: robot.pickup()                # pick up nearest object
+In [3]: robot.place("recycle_bin")    # place in any bin
 In [4]: robot.go_home()
 
-In [5]: commands()                   # quick reference of all commands
+In [5]: sort_all()                    # run the demo's built-in function
+
+In [6]: commands()                    # quick reference of all commands
 
 # Natural language control (requires ANTHROPIC_API_KEY)
-In [6]: chat('clear the table')
+In [7]: chat('clear the table')
   → pickup({})
   ✓ Success
   → place({})
   ✓ Success
   ...
+
+# Save your work as a new demo
+In [8]: save_demo('my_experiment')
+```
+
+### Creating demos
+
+Demos are Python files in `geodude/src/geodude/demos/`. Create one interactively with `save_demo('name')`, or write a file:
+
+```python
+# demos/stacking.py
+"""Stack cans into a tower."""
+scene = {"objects": {"can": 6}, "fixtures": {}}
+
+def stack_all():
+    while robot.pickup("can"):
+        robot.place()
+```
+
+Then run it: `geodude --demo stacking`
+
+### LLM chat (optional)
+
+```bash
+uv sync --extra chat              # install anthropic
+export ANTHROPIC_API_KEY=sk-...   # set your key
+geodude --demo recycling          # chat() is now available
 ```
 
 ## Development
@@ -139,10 +152,6 @@ In [6]: chat('clear the table')
 ```bash
 # Run tests for a specific package
 cd geodude && uv run pytest tests/ -v
-
-# Run a demo with the MuJoCo viewer (kinematic or physics)
-uv run mjpython geodude/examples/recycle.py
-uv run mjpython geodude/examples/recycle.py --physics
 
 # Run all tests across the workspace
 uv run pytest */tests/ -v
