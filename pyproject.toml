@@ -1,5 +1,9 @@
 # Virtual workspace root — no installable package here.
 # Run `uv sync` here to install all workspace members in a shared venv.
+[tool.uv]
+# Exclude labmaze — requires Bazel, not needed for dm_control.mjcf
+override-dependencies = ["labmaze ; sys_platform == 'never'"]
+
 [tool.uv.workspace]
 members = [
     "asset_manager",
