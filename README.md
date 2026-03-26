@@ -100,6 +100,40 @@ uv add mj-manipulator @ git+https://github.com/personalrobotics/mj_manipulator
 
 See each package's README for its standalone API.
 
+## Interactive Console
+
+IPython REPL with tab completion, introspection, and LLM-powered natural language control:
+
+```bash
+# Install chat dependencies
+uv sync --extra chat
+
+# Launch the console (kinematic mode)
+uv run python geodude/examples/console.py --preset recycling
+
+# With physics simulation and MuJoCo viewer
+uv run mjpython geodude/examples/console.py --physics --viewer --preset recycling
+```
+
+```python
+In [1]: robot.find_objects()
+Out[1]: ['can_0', 'can_1', 'can_2', 'potted_meat_can_0']
+
+In [2]: robot.pickup("can_0")       # pick up a specific object
+In [3]: robot.place("recycle_bin")   # place in any bin
+In [4]: robot.go_home()
+
+In [5]: commands()                   # quick reference of all commands
+
+# Natural language control (requires ANTHROPIC_API_KEY)
+In [6]: chat('clear the table')
+  → pickup({})
+  ✓ Success
+  → place({})
+  ✓ Success
+  ...
+```
+
 ## Development
 
 ```bash
