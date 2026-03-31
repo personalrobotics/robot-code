@@ -10,7 +10,9 @@ Built for the [Geodude](https://github.com/personalrobotics/geodude) bimanual ro
 git clone https://github.com/personalrobotics/robot-code
 cd robot-code
 ./setup.sh        # clones all repos, runs uv sync
-geodude --demo recycling
+uv run python -m geodude --demo recycling                # headless
+uv run python -m geodude --demo recycling --viser        # browser viewer
+uv run mjpython -m geodude --demo recycling --viewer     # native MuJoCo viewer
 ```
 
 See the [geodude README](https://github.com/personalrobotics/geodude) for the full console guide, demos, and LLM chat.
@@ -54,8 +56,9 @@ See the [geodude README](https://github.com/personalrobotics/geodude) for the fu
 | [pycbirrt](https://github.com/personalrobotics/pycbirrt) | CBiRRT motion planner with TSR constraints |
 | [tsr](https://github.com/personalrobotics/tsr) | Task Space Regions for grasp/place planning |
 | [mj_environment](https://github.com/personalrobotics/mj_environment) | MuJoCo environment wrapper with object registry |
-| [prl_assets](https://github.com/personalrobotics/prl_assets) | Reusable MuJoCo objects (cans, bins, potted meat) |
+| [prl_assets](https://github.com/personalrobotics/prl_assets) | Reusable MuJoCo objects (cans, bins, spam cans, pop-tarts) |
 | [asset_manager](https://github.com/personalrobotics/asset_manager) | Loads object geometry from `meta.yaml` files |
+| [mj_viser](https://github.com/personalrobotics/mj_viser) | Web-based MuJoCo viewer built on Viser |
 | [geodude_assets](https://github.com/personalrobotics/geodude_assets) | MuJoCo models for Geodude (UR5e + Robotiq 2F-140) |
 
 ## Development
