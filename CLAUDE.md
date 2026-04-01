@@ -12,7 +12,7 @@ Setup: `git clone https://github.com/personalrobotics/robot-code && ./setup.sh`
 | `mj_manipulator/` | personalrobotics/mj_manipulator | Generic arm control: planning, execution, Cartesian control, grasping |
 | `mj_manipulator_ros/` | personalrobotics/mj_manipulator_ros | Generic ROS 2 bridge: HardwareContext, mock node, trajectory conversion |
 | `mj_environment/` | personalrobotics/mj_environment | MuJoCo environment wrapper |
-| `mj_viser/` | personalrobotics/mj_viser | Web-based MuJoCo viewer built on Viser |
+| `mj_viser/` | personalrobotics/mj_viser | Web-based MuJoCo viewer: textures, sensor plots, HUD, click-to-select |
 | `prl_assets/` | personalrobotics/prl_assets | Reusable objects (cans, bins, spam cans, pop-tarts) |
 | `pycbirrt/` | personalrobotics/pycbirrt | CBiRRT motion planner with TSR constraints |
 | `tsr/` | personalrobotics/tsr | Task Space Regions for grasp/place planning |
