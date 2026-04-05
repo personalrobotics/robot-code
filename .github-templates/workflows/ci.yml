@@ -37,7 +37,12 @@ jobs:
         run: uv run ruff format --check .
 
       - name: Pytest
-        run: uv run pytest tests/ -v
+        run: |
+          if [ -d tests ]; then
+            uv run pytest tests/ -v
+          else
+            echo "No tests/ directory; skipping pytest."
+          fi
 
   notify-robot-code:
     needs: test
