@@ -23,6 +23,8 @@ pr_assets/
 *.txt
 *.md.bak
 # Explicitly tracked: CLAUDE.md, README.md, GEODUDE_DESIGN.md
+!scripts/*.py
+!tests/**/*.py
 *.zip
 *.jpg
 *.png
