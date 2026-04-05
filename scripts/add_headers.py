@@ -26,7 +26,15 @@ HEADER_LINES = [
     "# SPDX-License-Identifier: MIT",
     "# Copyright (c) 2025 Siddhartha Srinivasa",
 ]
-SKIP_DIR_NAMES = {".git", ".venv", "__pycache__", "node_modules", "build", "dist", ".eggs"}
+SKIP_DIR_NAMES = {
+    ".git",
+    ".venv",
+    "__pycache__",
+    "node_modules",
+    "build",
+    "dist",
+    ".eggs",
+}
 
 
 def should_skip(path: Path) -> bool:
@@ -48,7 +56,11 @@ def add_header(path: Path, *, apply: bool) -> str:
     if lines and lines[0].startswith("#!"):
         prefix.append(lines[0])
         i = 1
-    if i < len(lines) and ("coding:" in lines[i] or "coding=" in lines[i]) and lines[i].lstrip().startswith("#"):
+    if (
+        i < len(lines)
+        and ("coding:" in lines[i] or "coding=" in lines[i])
+        and lines[i].lstrip().startswith("#")
+    ):
         prefix.append(lines[i])
         i += 1
 
