@@ -30,15 +30,7 @@ SIBLING_DIRS = [
 ]
 
 TEXT_SUFFIXES = {".py", ".md", ".toml", ".yaml", ".yml", ".txt", ".cfg", ".ini", ".xml"}
-SKIP_DIR_NAMES = {
-    ".git",
-    ".venv",
-    "__pycache__",
-    "node_modules",
-    "mujoco_menagerie",
-    "build",
-    "dist",
-}
+SKIP_DIR_NAMES = {".git", ".venv", "__pycache__", "node_modules", "mujoco_menagerie", "build", "dist"}
 
 
 def test_no_banned_attribution() -> None:
