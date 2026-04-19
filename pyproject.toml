@@ -6,6 +6,7 @@ override-dependencies = ["labmaze ; sys_platform == 'never'"]
 
 [tool.uv.workspace]
 members = [
+    "ada_assets",
     "ada_mj",
     "asset_manager",
     "geodude",
