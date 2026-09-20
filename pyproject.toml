@@ -17,5 +17,4 @@ members = [
     "mj_viser",
     "prl_assets",
     "pycbirrt",
-    "tsr",
 ]
