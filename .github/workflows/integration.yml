@@ -88,7 +88,7 @@ jobs:
         run: |
           set +e
           fail=0
-          for d in ada_assets ada_mj asset_manager geodude geodude_assets mj_environment mj_manipulator mj_viser prl_assets pycbirrt tsr; do
+          for d in ada_assets ada_mj asset_manager geodude geodude_assets mj_environment mj_manipulator mj_viser prl_assets sscbirrt tsr; do
             if [ -d "$d/tests" ]; then
               echo "::group::$d tests"
               (cd "$d" && uv run pytest tests/ -q) || fail=1
@@ -102,7 +102,7 @@ jobs:
 
       - name: Import smoke check
         run: |
-          uv run python -c "import ada_assets, ada_mj, asset_manager, geodude, geodude_assets, mj_environment, mj_manipulator, mj_viser, prl_assets, pycbirrt, tsr; print('all imports OK')"
+          uv run python -c "import ada_assets, ada_mj, asset_manager, geodude, geodude_assets, mj_environment, mj_manipulator, mj_viser, prl_assets, sscbirrt, tsr; print('all imports OK')"
 
   notify-on-nightly-failure:
     needs: [integration, gitlink-freshness]

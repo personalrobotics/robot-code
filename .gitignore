@@ -10,7 +10,7 @@ mj_environment/
 mj_manipulator/
 mujoco_menagerie/
 prl_assets/
-pycbirrt/
+sscbirrt/
 tsr/
 
 # Old/orphan directories

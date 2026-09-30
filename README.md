@@ -2,7 +2,7 @@
 
 Multi-project workspace for MuJoCo-based robot manipulation research. A curated set of focused libraries that compose into a full stack — from low-level joint control to high-level pick-and-place with behavior trees.
 
-Built for the [Geodude](https://github.com/personalrobotics/geodude) bimanual robot (dual UR5e + Robotiq 2F-140), but the core libraries (`mj_manipulator`, `pycbirrt`, `tsr`) are robot-agnostic and work with any MuJoCo arm.
+Built for the [Geodude](https://github.com/personalrobotics/geodude) bimanual robot (dual UR5e + Robotiq 2F-140), but the core libraries (`mj_manipulator`, `sscbirrt`, `tsr`) are robot-agnostic and work with any MuJoCo arm.
 
 ## Quick Start
 
@@ -29,7 +29,7 @@ See the [geodude README](https://github.com/personalrobotics/geodude) for the fu
 │  Generic arm control: planning, execution, Cartesian    │
 │  control, grasping, collision checking                  │
 ├──────────────┬──────────────┬───────────────────────────┤
-│  pycbirrt    │  tsr         │  mj_environment           │
+│  sscbirrt    │  tsr         │  mj_environment           │
 │  CBiRRT      │  Task Space  │  MuJoCo environment       │
 │  planner     │  Regions     │  wrapper + object registry│
 ├──────────────┴──────────────┼───────────────────────────┤
@@ -53,7 +53,7 @@ See the [geodude README](https://github.com/personalrobotics/geodude) for the fu
 | [geodude](https://github.com/personalrobotics/geodude) | Bimanual robot: high-level API, interactive console, demos, LLM chat |
 | [mj_manipulator](https://github.com/personalrobotics/mj_manipulator) | Generic arm control: planning, trajectory execution, Cartesian control |
 | [mj_manipulator_ros](https://github.com/personalrobotics/mj_manipulator_ros) | **WIP** — ROS 2 bridge: `HardwareContext`, mock node |
-| [pycbirrt](https://github.com/personalrobotics/pycbirrt) | CBiRRT motion planner with TSR constraints |
+| [sscbirrt](https://github.com/personalrobotics/sscbirrt) | CBiRRT motion planner with TSR constraints |
 | [tsr](https://github.com/personalrobotics/tsr) | Task Space Regions for grasp/place planning |
 | [mj_environment](https://github.com/personalrobotics/mj_environment) | MuJoCo environment wrapper with object registry |
 | [prl_assets](https://github.com/personalrobotics/prl_assets) | Reusable MuJoCo objects (cans, bins, spam cans, pop-tarts) |
