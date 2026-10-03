@@ -11,7 +11,7 @@ mj_manipulator/
 mujoco_menagerie/
 prl_assets/
 sscbirrt/
-tsr/
+sstsr/
 
 # Old/orphan directories
 pyplanning/

@@ -54,7 +54,7 @@ See the [geodude README](https://github.com/personalrobotics/geodude) for the fu
 | [mj_manipulator](https://github.com/personalrobotics/mj_manipulator) | Generic arm control: planning, trajectory execution, Cartesian control |
 | [mj_manipulator_ros](https://github.com/personalrobotics/mj_manipulator_ros) | **WIP** — ROS 2 bridge: `HardwareContext`, mock node |
 | [sscbirrt](https://github.com/personalrobotics/sscbirrt) | CBiRRT motion planner with TSR constraints |
-| [tsr](https://github.com/personalrobotics/tsr) | Task Space Regions for grasp/place planning |
+| [sstsr](https://github.com/personalrobotics/sstsr) | Task Space Regions for grasp/place planning (imports as `tsr`) |
 | [mj_environment](https://github.com/personalrobotics/mj_environment) | MuJoCo environment wrapper with object registry |
 | [prl_assets](https://github.com/personalrobotics/prl_assets) | Reusable MuJoCo objects (cans, bins, spam cans, pop-tarts) |
 | [asset_manager](https://github.com/personalrobotics/asset_manager) | Loads object geometry from `meta.yaml` files |

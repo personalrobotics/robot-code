@@ -25,7 +25,7 @@ REPOS=(
     "https://github.com/personalrobotics/mj_viser"
     "https://github.com/personalrobotics/prl_assets"
     "https://github.com/personalrobotics/sscbirrt"
-    "https://github.com/personalrobotics/tsr"
+    "https://github.com/personalrobotics/sstsr"
 )
 
 # mujoco_menagerie is an external repo (not a Python package) needed by demos
