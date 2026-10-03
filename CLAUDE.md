@@ -15,7 +15,7 @@ Setup: `git clone https://github.com/personalrobotics/robot-code && ./setup.sh`
 | `mj_viser/` | personalrobotics/mj_viser | Web-based MuJoCo viewer: textures, sensor plots, HUD, click-to-select |
 | `prl_assets/` | personalrobotics/prl_assets | Reusable objects (cans, bins, spam cans, pop-tarts) |
 | `sscbirrt/` | personalrobotics/sscbirrt | CBiRRT motion planner over sets (starts, goals, path constraints) with a C++ core and TSRs |
-| `tsr/` | personalrobotics/tsr | Task Space Regions for grasp/place planning |
+| `sstsr/` | personalrobotics/sstsr | Task Space Regions for grasp/place planning (imports as `tsr`) |
 | `asset_manager/` | personalrobotics/asset_manager | Loads objects from meta.yaml files |
 | `mujoco_menagerie/` | google-deepmind/mujoco_menagerie | UR5e, Franka base models (cloned by setup.sh, not a Python package) |
 
