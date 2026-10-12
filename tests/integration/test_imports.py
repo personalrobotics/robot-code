@@ -15,7 +15,7 @@ SIBLINGS = [
     "mj_manipulator",
     "mj_viser",
     "prl_assets",
-    "pycbirrt",
+    "sscbirrt",
     "tsr",
 ]
 

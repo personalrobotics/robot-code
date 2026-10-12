@@ -10,8 +10,8 @@ mj_environment/
 mj_manipulator/
 mujoco_menagerie/
 prl_assets/
-pycbirrt/
-tsr/
+sscbirrt/
+sstsr/
 
 # Old/orphan directories
 pyplanning/

@@ -23,7 +23,7 @@ SIBLINGS=(
     mj_manipulator_ros
     mj_viser
     prl_assets
-    pycbirrt
+    sscbirrt
     tsr
 )
 
