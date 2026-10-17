@@ -14,6 +14,7 @@ The convention follows MuJoCo Menagerie, so robots imported from Menagerie usual
 | 1, 4, 5 | Not used | |
 
 - **Separate visual and collision geometry:** if a body has a visual mesh, its collision geometry goes in **3**, never 0. Otherwise collision proxies draw on top of the visual mesh.
+- **Hide collision geometry with group 3, not with alpha 0.** Give it a visible color, as Menagerie robots do, so toggling group 3 in a viewer reveals it. A transparent proxy cannot be inspected.
 - **Physics-disabled volumes** (`contype="0" conaffinity="0"`) are visuals (2) unless they exist for collision checking, in which case they go in 3. An example is ADA's `body_safety_envelope`.
 
 ## Sites

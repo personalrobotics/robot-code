@@ -40,7 +40,30 @@ def _models() -> list[tuple[str, Path]]:
 
 # Models that do not comply yet, with the issue tracking each fix. These are strict
 # expected failures: once a model is fixed, its test passes and the entry must go.
-KNOWN_VIOLATIONS: dict[str, str] = {}
+_GEODUDE = "personalrobotics/geodude_assets#28"
+_PRL = "personalrobotics/prl_assets#18"
+KNOWN_VIOLATIONS: dict[str, str] = {
+    "geodude_assets/geodude/geodude.xml": _GEODUDE,
+    "geodude_assets/vention/vention.xml": _GEODUDE,
+    "geodude_assets/abh_left_small/abh_left_small.xml": _GEODUDE,
+    "geodude_assets/abh_right_small/abh_right_small.xml": _GEODUDE,
+    "prl_assets/can/can.xml": _PRL,
+    "prl_assets/cracker_box/cracker_box.xml": _PRL,
+    "prl_assets/fuze_bottle/fuze_bottle.xml": _PRL,
+    "prl_assets/gelatin_box/gelatin_box.xml": _PRL,
+    "prl_assets/herring_tin/herring_tin.xml": _PRL,
+    "prl_assets/lunchbox/lunchbox.xml": _PRL,
+    "prl_assets/notebook/notebook.xml": _PRL,
+    "prl_assets/plastic_bowl/plastic_bowl.xml": _PRL,
+    "prl_assets/plastic_glass/plastic_glass.xml": _PRL,
+    "prl_assets/plastic_plate/plastic_plate.xml": _PRL,
+    "prl_assets/pocky_box/pocky_box.xml": _PRL,
+    "prl_assets/pop_tarts_case/pop_tarts_case.xml": _PRL,
+    "prl_assets/spam_can/spam_can.xml": _PRL,
+    "prl_assets/sugar_box/sugar_box.xml": _PRL,
+    "prl_assets/wicker_tray/wicker_tray.xml": _PRL,
+    "prl_assets/yellow_tote/yellow_tote.xml": _PRL,
+}
 
 
 def _id(package: str, path: Path) -> str:

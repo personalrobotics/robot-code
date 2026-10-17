@@ -26,6 +26,15 @@ def _name(model: mujoco.MjModel, obj: mujoco.mjtObj, index: int, prefix: str) ->
     return mujoco.mj_id2name(model, obj, index) or f"{prefix}{index}"
 
 
+def _alpha(model: mujoco.MjModel, geom: int) -> float:
+    """Alpha MuJoCo draws a geom with: its material's unless the geom sets its own rgba."""
+    mat = model.geom_matid[geom]
+    rgba = model.geom_rgba[geom]
+    if mat >= 0 and list(rgba) == [0.5, 0.5, 0.5, 1.0]:
+        rgba = model.mat_rgba[mat]
+    return float(rgba[3])
+
+
 def violations(model: mujoco.MjModel) -> list[str]:
     """Every geom and site whose group breaks the convention, with the rule it breaks."""
     found = []
@@ -48,11 +57,15 @@ def violations(model: mujoco.MjModel) -> list[str]:
                     f"geom {name} (body {body}): non-colliding geom in group {group}; "
                     f"use {VISUAL_GROUP} (visual) or {COLLISION_GROUP} (collision volume)"
                 )
+        elif _alpha(model, g) == 0:
+            found.append(
+                f"geom {name} (body {body}): colliding geom hidden with alpha 0; "
+                f"give it a color and put it in group {COLLISION_GROUP}"
+            )
         elif group == RENDER_AND_COLLIDE_GROUP:
             if int(model.geom_bodyid[g]) in bodies_with_visuals:
                 found.append(
-                    f"geom {name} (body {body}): collision geom in group 0 beside a visual mesh; "
-                    f"use {COLLISION_GROUP}"
+                    f"geom {name} (body {body}): collision geom in group 0 beside a visual mesh; use {COLLISION_GROUP}"
                 )
         elif group != COLLISION_GROUP:
             found.append(f"geom {name} (body {body}): colliding geom in group {group}; use {COLLISION_GROUP} or 0")
