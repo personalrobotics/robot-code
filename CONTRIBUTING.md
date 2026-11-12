@@ -12,7 +12,8 @@ cd robot-code
 ./setup.sh
 ```
 
-`setup.sh` clones every sibling repo into the workspace and runs `uv sync`.
+`setup.sh` clones every sibling repo into the workspace, syncs geodude's own environment
+(`cd geodude && uv sync --locked`), and runs `uv sync` for the shared workspace.
 You can then work in any sibling's directory.
 
 ## Running tests and linters

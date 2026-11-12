@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Bootstrap the robot-code workspace.
 # Run once after cloning this repo to clone all sibling repos and install
-# the shared Python environment.
+# geodude's own environment and the shared Python environment.
 set -euo pipefail
 
 # Every sibling repo the workspace tracks. The ADA repos (ada_assets, ada_mj)
@@ -62,21 +62,25 @@ echo ""
 echo "==> Removing stale per-package venvs (workspace uses shared root .venv)..."
 # `uv run` inside a workspace member with its own .venv ignores the shared
 # workspace venv, which is a common silent footgun. See robot-code#62.
+# geodude is not a member: its .venv is its own environment, so it stays.
 shopt -s nullglob
 for d in */.venv; do
+    [ "$d" = "geodude/.venv" ] && continue
     echo "    removing $d"
     rm -rf "$d"
 done
 shopt -u nullglob
 
 echo ""
+echo "==> Installing Geodude in its own environment (geodude/, uv sync --locked)..."
+# First, so it does not depend on the shared workspace resolving.
+(cd geodude && uv sync --locked)
+
+echo ""
 echo "==> Installing Python workspace (uv sync)..."
 uv sync
 
 echo ""
-echo "==> Installing Geodude in its own environment (geodude/, uv sync --locked)..."
-(cd geodude && uv sync --locked)
-
-echo ""
 echo "Done. Verify with:"
 echo "  uv run python mj_manipulator/demos/cartesian_control.py"
+echo "  (cd geodude && uv run geodude-recycling --seed 0)"
