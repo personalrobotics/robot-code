@@ -7,7 +7,7 @@ import importlib
 
 import pytest
 
-# geodude is not here: Geodude 4.0 has its own environment (setup.sh), apart from this one.
+# geodude and ada_mj are not here: each has its own environment (setup.sh), apart from this one.
 SIBLINGS = [
     "asset_manager",
     "geodude_assets",

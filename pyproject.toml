@@ -7,10 +7,10 @@ override-dependencies = ["labmaze ; sys_platform == 'never'"]
 [tool.uv.workspace]
 # geodude is not a member: Geodude 4.0 is its own uv project, whose dependencies
 # (ssrobot, ssgrasping, and ssmjviser, which imports as mj_viser) cannot share this
-# environment's 3.x stack. setup.sh syncs it on its own.
+# environment's 3.x stack. setup.sh syncs it on its own. ada_mj is not a member for the
+# same reason: it moved to ssrobot and ssgrasping (personalrobotics/ada_mj#57).
 members = [
     "ada_assets",
-    "ada_mj",
     "asset_manager",
     "geodude_assets",
     "mj_environment",

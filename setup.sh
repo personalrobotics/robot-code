@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 # Bootstrap the robot-code workspace.
 # Run once after cloning this repo to clone all sibling repos and install
-# geodude's own environment and the shared Python environment.
+# geodude's and ada_mj's own environments and the shared Python environment.
 set -euo pipefail
 
-# Every sibling repo the workspace tracks. The ADA repos (ada_assets, ada_mj)
-# are uv workspace members, so omitting them breaks `uv sync` on a fresh clone;
-# the ROS 2 repos (ada_ros2, ada_feeding, articutool_ros2) are not Python
+# Every sibling repo the workspace tracks. ada_assets is a uv workspace member,
+# so omitting it breaks `uv sync` on a fresh clone; ada_mj and geodude each have
+# their own environment, synced below; the ROS 2 repos (ada_ros2, ada_feeding, articutool_ros2) are not Python
 # packages but are part of the workspace. This list must stay in sync with the
 # tracked gitlinks — scripts/check_gitlink_freshness.sh gates that they are not
 # stale. ada_feeding's default branch is ros2-devel (git clone picks it up).
@@ -62,10 +62,11 @@ echo ""
 echo "==> Removing stale per-package venvs (workspace uses shared root .venv)..."
 # `uv run` inside a workspace member with its own .venv ignores the shared
 # workspace venv, which is a common silent footgun. See robot-code#62.
-# geodude is not a member: its .venv is its own environment, so it stays.
+# geodude and ada_mj are not members: each .venv is its own environment, so it stays.
 shopt -s nullglob
 for d in */.venv; do
     [ "$d" = "geodude/.venv" ] && continue
+    [ "$d" = "ada_mj/.venv" ] && continue
     echo "    removing $d"
     rm -rf "$d"
 done
@@ -77,6 +78,10 @@ echo "==> Installing Geodude in its own environment (geodude/, uv sync --locked)
 (cd geodude && uv sync --locked)
 
 echo ""
+echo "==> Installing ADA in its own environment (ada_mj/, uv sync --locked)..."
+(cd ada_mj && uv sync --locked)
+
+echo ""
 echo "==> Installing Python workspace (uv sync)..."
 uv sync
 
@@ -84,3 +89,4 @@ echo ""
 echo "Done. Verify with:"
 echo "  uv run python mj_manipulator/demos/cartesian_control.py"
 echo "  (cd geodude && uv run geodude-recycling --seed 0)"
+echo "  (cd ada_mj && uv run ada-lift --seed 0)"
