@@ -102,8 +102,8 @@ jobs:
 
       - name: Import smoke check
         run: |
-          # geodude has its own environment (setup.sh); its tests above run in it.
-          uv run python -c "import ada_assets, ada_mj, asset_manager, geodude_assets, mj_environment, mj_manipulator, mj_viser, prl_assets, sscbirrt, tsr; print('all imports OK')"
+          # geodude and ada_mj have their own environments (setup.sh); their tests above run in them.
+          uv run python -c "import ada_assets, asset_manager, geodude_assets, mj_environment, mj_manipulator, mj_viser, prl_assets, sscbirrt, tsr; print('all imports OK')"
 
   notify-on-nightly-failure:
     needs: [integration, gitlink-freshness]
