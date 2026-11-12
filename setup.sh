@@ -74,5 +74,9 @@ echo "==> Installing Python workspace (uv sync)..."
 uv sync
 
 echo ""
+echo "==> Installing Geodude in its own environment (geodude/, uv sync --locked)..."
+(cd geodude && uv sync --locked)
+
+echo ""
 echo "Done. Verify with:"
 echo "  uv run python mj_manipulator/demos/cartesian_control.py"
