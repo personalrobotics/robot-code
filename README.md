@@ -9,13 +9,13 @@ Built for the [Geodude](https://github.com/personalrobotics/geodude) bimanual ro
 ```bash
 git clone https://github.com/personalrobotics/robot-code
 cd robot-code
-./setup.sh        # clones all repos, runs uv sync
-uv run python -m geodude --demo recycling                # headless
-uv run python -m geodude --demo recycling --viser        # browser viewer
-uv run mjpython -m geodude --demo recycling --viewer     # native MuJoCo viewer
+./setup.sh        # clones all repos, syncs the shared workspace and geodude's own environment
+cd geodude
+uv run geodude-recycling --seed 0 --mix 5             # headless
+uv run geodude-recycling --seed 0 --mix 5 --viser     # browser viewer
 ```
 
-See the [geodude README](https://github.com/personalrobotics/geodude) for the full console guide, demos, and LLM chat.
+Geodude 4.0 has its own uv environment, apart from the shared workspace; see the [geodude README](https://github.com/personalrobotics/geodude) for its robot API and recycling evaluation. The 3.x console, demos and LLM chat are at its `v3.1.0` tag.
 
 ## Architecture
 
