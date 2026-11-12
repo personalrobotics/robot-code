@@ -2,7 +2,7 @@
 
 Multi-project workspace for MuJoCo-based robot manipulation research. A curated set of focused libraries that compose into a full stack — from low-level joint control to high-level pick-and-place with behavior trees.
 
-Built for the [Geodude](https://github.com/personalrobotics/geodude) bimanual robot (dual UR5e + Robotiq 2F-140), but the core libraries (`mj_manipulator`, `sscbirrt`, `tsr`) are robot-agnostic and work with any MuJoCo arm.
+Built for the [Geodude](https://github.com/personalrobotics/geodude) bimanual robot (dual UR5e + Robotiq 2F-140), and for ADA (a Kinova JACO2 with its two-finger hand). The libraries underneath (ssrobot, ssgrasping, `sscbirrt`, `tsr`) are robot-neutral.
 
 ## Quick Start
 
@@ -21,40 +21,29 @@ ADA's application, ada_mj, also has its own environment: `cd ada_mj && uv run ad
 
 ## Architecture
 
-```
-┌─────────────────────────────────────────────────────────┐
-│  geodude                                                │
-│  Bimanual robot: pickup/place primitives, behavior      │
-│  trees, Vention linear bases, interactive console       │
-├─────────────────────────────────────────────────────────┤
-│  mj_manipulator                                         │
-│  Generic arm control: planning, execution, Cartesian    │
-│  control, grasping, collision checking                  │
-├──────────────┬──────────────┬───────────────────────────┤
-│  sscbirrt    │  tsr         │  mj_environment           │
-│  CBiRRT      │  Task Space  │  MuJoCo environment       │
-│  planner     │  Regions     │  wrapper + object registry│
-├──────────────┴──────────────┼───────────────────────────┤
-│  prl_assets + asset_manager │  geodude_assets            │
-│  Reusable objects (cans,    │  Geodude MuJoCo models     │
-│  bins) + YAML loader        │  (UR5e + Robotiq)          │
-└─────────────────────────────┴───────────────────────────┘
-```
+Each robot's application (geodude, ada_mj) is built on
+[ssrobot](https://github.com/personalrobotics/ssrobot) and
+[ssgrasping](https://github.com/personalrobotics/ssgrasping), pinned by each application's own lock:
 
-### Key design decisions
+| Layer | Owns |
+| --- | --- |
+| geodude, ada_mj | Each robot's task: which objects, the scene, the specs passed to each skill, how the run is driven, what counts as success |
+| ssgrasping | Grasp, place, and drop skills written against robot-neutral contracts |
+| ssrobot | Robot packages, the session and scene, planning contracts, the checked execution boundary, MuJoCo runtimes |
+| sscbirrt, sstsr | Planning and timing over sets of starts, goals and constraints; grasp and placement templates |
+| geodude_assets, ada_assets, prl_assets | Robot packages and object models |
 
-- **ExecutionContext protocol** — same code runs in kinematic simulation, physics simulation, and on real hardware. `SimContext` for MuJoCo, `HardwareContext` (via ROS 2) for real robots.
-- **Everything goes through the context** — no direct `mj_forward` or `data.qpos` writes during execution. Physics never freezes.
-- **TSR-based grasping** — grasp and placement poses defined as Task Space Regions. The planner handles IK internally.
-- **Behavior trees** — manipulation primitives composed with py_trees. Recovery is built into the tree structure.
+mj_manipulator, the earlier arm-control library, and its ROS 2 bridge mj_manipulator_ros are retired
+and archived ([mj_manipulator#182](https://github.com/personalrobotics/mj_manipulator/issues/182));
+its README maps each capability to its successor.
 
 ## Packages
 
 | Package | Description |
 |---------|-------------|
 | [geodude](https://github.com/personalrobotics/geodude) | Bimanual robot: high-level API, interactive console, demos, LLM chat |
-| [mj_manipulator](https://github.com/personalrobotics/mj_manipulator) | Generic arm control: planning, trajectory execution, Cartesian control |
-| [mj_manipulator_ros](https://github.com/personalrobotics/mj_manipulator_ros) | **WIP** — ROS 2 bridge: `HardwareContext`, mock node |
+| [ada_mj](https://github.com/personalrobotics/ada_mj) | ADA's application: grasp and lift in open space |
+| [ada_assets](https://github.com/personalrobotics/ada_assets) | MuJoCo models and the ssrobot package for ADA |
 | [sscbirrt](https://github.com/personalrobotics/sscbirrt) | CBiRRT motion planner with TSR constraints |
 | [sstsr](https://github.com/personalrobotics/sstsr) | Task Space Regions for grasp/place planning (imports as `tsr`) |
 | [mj_environment](https://github.com/personalrobotics/mj_environment) | MuJoCo environment wrapper with object registry |
@@ -75,4 +64,4 @@ uv run pytest */tests/ -v
 
 ### Real hardware (ROS 2)
 
-**Work in progress.** See [geodude#91](https://github.com/personalrobotics/geodude/issues/91) for the architecture and setup guide.
+**Planned** in ssrobot's hardware milestone: a ROS 2 runtime ([ssrobot#35](https://github.com/personalrobotics/ssrobot/issues/35)) and Geodude's hardware profiles ([ssrobot#36](https://github.com/personalrobotics/ssrobot/issues/36)).

@@ -21,8 +21,6 @@ SIBLING_DIRS = [
     "geodude",
     "geodude_assets",
     "mj_environment",
-    "mj_manipulator",
-    "mj_manipulator_ros",
     "mj_viser",
     "prl_assets",
     "sscbirrt",
