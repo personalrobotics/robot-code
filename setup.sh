@@ -80,6 +80,10 @@ echo "==> Installing ADA in its own environment (ada_mj/, uv sync --locked)..."
 (cd ada_mj && uv sync --locked)
 
 echo ""
+echo "==> Installing ada_assets in its own environment (ada_assets/, uv sync --locked)..."
+(cd ada_assets && uv sync --locked)
+
+echo ""
 echo "==> Installing Python workspace (uv sync)..."
 uv sync
 

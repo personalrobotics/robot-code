@@ -1,6 +1,6 @@
 # robot-code
 
-Multi-project workspace for MuJoCo-based robot manipulation research. A curated set of focused libraries that compose into a full stack — from low-level joint control to high-level pick-and-place with behavior trees.
+Multi-project workspace for MuJoCo-based robot manipulation research. Each robot's application sits on a small set of shared libraries, from robot packages and planning to robot-neutral grasping skills.
 
 Built for the [Geodude](https://github.com/personalrobotics/geodude) bimanual robot (dual UR5e + Robotiq 2F-140), and for ADA (a Kinova JACO2 with its two-finger hand). The libraries underneath (ssrobot, ssgrasping, `sscbirrt`, `tsr`) are robot-neutral.
 
@@ -41,7 +41,7 @@ its README maps each capability to its successor.
 
 | Package | Description |
 |---------|-------------|
-| [geodude](https://github.com/personalrobotics/geodude) | Bimanual robot: high-level API, interactive console, demos, LLM chat |
+| [geodude](https://github.com/personalrobotics/geodude) | Geodude 4.0: recycling, recovery, the robot API |
 | [ada_mj](https://github.com/personalrobotics/ada_mj) | ADA's application: grasp and lift in open space |
 | [ada_assets](https://github.com/personalrobotics/ada_assets) | MuJoCo models and the ssrobot package for ADA |
 | [sscbirrt](https://github.com/personalrobotics/sscbirrt) | CBiRRT motion planner with TSR constraints |
@@ -58,8 +58,8 @@ its README maps each capability to its successor.
 # Run tests for a specific package
 cd geodude && uv run pytest tests/ -v
 
-# Run all tests across the workspace
-uv run pytest */tests/ -v
+# The shared workspace's integration tests
+uv run pytest tests/integration -v
 ```
 
 ### Real hardware (ROS 2)
