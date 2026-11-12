@@ -17,7 +17,7 @@ uv run geodude-recycling --seed 0 --mix 5 --viser     # browser viewer
 
 Geodude 4.0 has its own uv environment, apart from the shared workspace; see the [geodude README](https://github.com/personalrobotics/geodude) for its robot API and recycling evaluation. The 3.x console, demos and LLM chat are at its `v3.1.0` tag.
 
-ADA's application, ada_mj, also has its own environment: `cd ada_mj && uv run ada-lift --seed 0` grasps and lifts a cylinder (see the [ada_mj README](https://github.com/personalrobotics/ada_mj)). Its mj_manipulator version is at its `v0.1.0` tag.
+ADA's application, ada_mj, also has its own environment: `cd ada_mj && uv run ada-lift --seed 0` grasps and lifts a cylinder (see the [ada_mj README](https://github.com/personalrobotics/ada_mj)). The earlier ada_mj, built on mj_manipulator, is at ada_mj's `v0.1.0` tag.
 
 ## Architecture
 

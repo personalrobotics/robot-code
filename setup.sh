@@ -4,9 +4,9 @@
 # geodude's and ada_mj's own environments and the shared Python environment.
 set -euo pipefail
 
-# Every sibling repo the workspace tracks. The ADA repos (ada_assets, ada_mj)
-# are uv workspace members, so omitting them breaks `uv sync` on a fresh clone;
-# the ROS 2 repos (ada_ros2, ada_feeding, articutool_ros2) are not Python
+# Every sibling repo the workspace tracks. ada_assets is a uv workspace member,
+# so omitting it breaks `uv sync` on a fresh clone; ada_mj and geodude each have
+# their own environment, synced below; the ROS 2 repos (ada_ros2, ada_feeding, articutool_ros2) are not Python
 # packages but are part of the workspace. This list must stay in sync with the
 # tracked gitlinks — scripts/check_gitlink_freshness.sh gates that they are not
 # stale. ada_feeding's default branch is ros2-devel (git clone picks it up).
