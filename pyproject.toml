@@ -4,13 +4,18 @@
 # Exclude labmaze — requires Bazel, not needed for dm_control.mjcf
 override-dependencies = ["labmaze ; sys_platform == 'never'"]
 
+[tool.uv.sources]
+# Members name each other by git URL so each also installs on its own; here they resolve
+# to the workspace's checkouts.
+asset-manager = { workspace = true }
+
 [tool.uv.workspace]
 # geodude and ada_mj are not members: each is its own uv project on ssrobot and
 # ssgrasping, with its own lock (personalrobotics/geodude#212, personalrobotics/ada_mj#57).
 # setup.sh syncs each on its own.
 # mj_manipulator and mj_manipulator_ros are retired (personalrobotics/mj_manipulator#182).
 # ada_assets is not a member either: nothing here uses it, ada_mj pins it by commit, and
-# its own dev dependencies (sstsr 4.2) differ from this workspace's.
+# its own dev dependencies (ssrobot, by commit) are not this workspace's.
 # sscbirrt is not a member: only mj_manipulator built against its source; geodude and
 # ada_mj take it from PyPI. Its tests run as its own project, with its extras.
 members = [

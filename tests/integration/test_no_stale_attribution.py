@@ -17,6 +17,8 @@ BANNED_PATTERNS = [
 ]
 
 SIBLING_DIRS = [
+    # Not ada_assets: it vendors third-party models whose licenses must keep their copyright holders.
+    "ada_mj",
     "asset_manager",
     "geodude",
     "geodude_assets",
@@ -24,7 +26,7 @@ SIBLING_DIRS = [
     "mj_viser",
     "prl_assets",
     "sscbirrt",
-    "tsr",
+    "sstsr",
 ]
 
 TEXT_SUFFIXES = {".py", ".md", ".toml", ".yaml", ".yml", ".txt", ".cfg", ".ini", ".xml"}

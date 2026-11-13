@@ -88,12 +88,14 @@ jobs:
         run: |
           set +e
           fail=0
-          for d in ada_assets ada_mj asset_manager geodude geodude_assets mj_environment mj_viser prl_assets sscbirrt tsr; do
+          # Only the workspace members: they share the root environment, which their own CI
+          # doesn't test. geodude, ada_mj, ada_assets, sscbirrt and sstsr are their own
+          # projects with their own locks, so their own CI already runs these suites.
+          for d in asset_manager geodude_assets mj_environment mj_viser prl_assets; do
             if [ -d "$d/tests" ]; then
               echo "::group::$d tests"
-              # sscbirrt is its own project; its test dependencies are its extras.
-              # prl_assets' (scipy among them) are its dev extra, which the root sync doesn't install.
-              extras=""; [ "$d" = sscbirrt ] && extras="--all-extras"; [ "$d" = prl_assets ] && extras="--extra dev"
+              # prl_assets' test dependencies (scipy among them) are its dev extra, which the root sync doesn't install.
+              extras=""; [ "$d" = prl_assets ] && extras="--extra dev"
               (cd "$d" && uv run $extras pytest tests/ -q) || fail=1
               echo "::endgroup::"
             fi
