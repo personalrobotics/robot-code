@@ -4,11 +4,6 @@
 # Exclude labmaze — requires Bazel, not needed for dm_control.mjcf
 override-dependencies = ["labmaze ; sys_platform == 'never'"]
 
-[tool.uv.sources]
-# Members name each other by git URL so each also installs on its own; here they resolve
-# to the workspace's checkouts.
-asset-manager = { workspace = true }
-
 [tool.uv.workspace]
 # geodude and ada_mj are not members: each is its own uv project on ssrobot and
 # ssgrasping, with its own lock (personalrobotics/geodude#212, personalrobotics/ada_mj#57).
