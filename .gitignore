@@ -7,7 +7,9 @@ asset_manager/
 geodude/
 geodude_assets/
 mj_environment/
+# Retired (personalrobotics/mj_manipulator#182); kept so existing clones stay untracked.
 mj_manipulator/
+mj_manipulator_ros/
 mujoco_menagerie/
 prl_assets/
 sscbirrt/

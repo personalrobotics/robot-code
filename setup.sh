@@ -4,9 +4,8 @@
 # geodude's and ada_mj's own environments and the shared Python environment.
 set -euo pipefail
 
-# Every sibling repo the workspace tracks. ada_assets is a uv workspace member,
-# so omitting it breaks `uv sync` on a fresh clone; ada_mj and geodude each have
-# their own environment, synced below; the ROS 2 repos (ada_ros2, ada_feeding, articutool_ros2) are not Python
+# Every sibling repo the workspace tracks. ada_mj and geodude each have their own
+# environment, synced below, and ada_assets is its own project too; the ROS 2 repos (ada_ros2, ada_feeding, articutool_ros2) are not Python
 # packages but are part of the workspace. This list must stay in sync with the
 # tracked gitlinks — scripts/check_gitlink_freshness.sh gates that they are not
 # stale. ada_feeding's default branch is ros2-devel (git clone picks it up).
@@ -20,8 +19,6 @@ REPOS=(
     "https://github.com/personalrobotics/geodude"
     "https://github.com/personalrobotics/geodude_assets"
     "https://github.com/personalrobotics/mj_environment"
-    "https://github.com/personalrobotics/mj_manipulator"
-    "https://github.com/personalrobotics/mj_manipulator_ros"
     "https://github.com/personalrobotics/mj_viser"
     "https://github.com/personalrobotics/prl_assets"
     "https://github.com/personalrobotics/sscbirrt"
@@ -62,11 +59,13 @@ echo ""
 echo "==> Removing stale per-package venvs (workspace uses shared root .venv)..."
 # `uv run` inside a workspace member with its own .venv ignores the shared
 # workspace venv, which is a common silent footgun. See robot-code#62.
-# geodude and ada_mj are not members: each .venv is its own environment, so it stays.
+# geodude, ada_mj, ada_assets and sscbirrt are not members: each .venv is its own environment, so it stays.
 shopt -s nullglob
 for d in */.venv; do
     [ "$d" = "geodude/.venv" ] && continue
     [ "$d" = "ada_mj/.venv" ] && continue
+    [ "$d" = "ada_assets/.venv" ] && continue
+    [ "$d" = "sscbirrt/.venv" ] && continue
     echo "    removing $d"
     rm -rf "$d"
 done
@@ -82,11 +81,14 @@ echo "==> Installing ADA in its own environment (ada_mj/, uv sync --locked)..."
 (cd ada_mj && uv sync --locked)
 
 echo ""
+echo "==> Installing ada_assets in its own environment (ada_assets/, uv sync --locked)..."
+(cd ada_assets && uv sync --locked)
+
+echo ""
 echo "==> Installing Python workspace (uv sync)..."
 uv sync
 
 echo ""
 echo "Done. Verify with:"
-echo "  uv run python mj_manipulator/demos/cartesian_control.py"
 echo "  (cd geodude && uv run geodude-recycling --seed 0)"
 echo "  (cd ada_mj && uv run ada-lift --seed 0)"

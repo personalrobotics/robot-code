@@ -9,8 +9,6 @@ Setup: `git clone https://github.com/personalrobotics/robot-code && ./setup.sh`
 |-----------|------|-------------|
 | `geodude/` | personalrobotics/geodude | Geodude 4.0 on ssrobot and ssgrasping: recycling, recovery, the robot API. Its own uv environment, not a workspace member (`cd geodude && uv sync --locked`); 3.x is at `v3.1.0` |
 | `geodude_assets/` | personalrobotics/geodude_assets | MuJoCo models for Geodude (UR5e + Robotiq) |
-| `mj_manipulator/` | personalrobotics/mj_manipulator | Generic arm control: planning, execution, Cartesian control, grasping |
-| `mj_manipulator_ros/` | personalrobotics/mj_manipulator_ros | Generic ROS 2 bridge: HardwareContext, mock node, trajectory conversion |
 | `mj_environment/` | personalrobotics/mj_environment | MuJoCo environment wrapper |
 | `mj_viser/` | personalrobotics/mj_viser | Web-based MuJoCo viewer: textures, sensor plots, HUD, click-to-select |
 | `prl_assets/` | personalrobotics/prl_assets | Reusable objects (cans, bins, spam cans, pop-tarts) |

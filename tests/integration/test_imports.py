@@ -7,16 +7,13 @@ import importlib
 
 import pytest
 
-# geodude and ada_mj are not here: each has its own environment (setup.sh), apart from this one.
+# geodude, ada_mj, ada_assets and sscbirrt are not here: each is its own project, apart from this environment.
 SIBLINGS = [
     "asset_manager",
     "geodude_assets",
     "mj_environment",
-    "mj_manipulator",
     "mj_viser",
     "prl_assets",
-    "sscbirrt",
-    "tsr",
 ]
 
 
