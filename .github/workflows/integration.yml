@@ -92,7 +92,8 @@ jobs:
             if [ -d "$d/tests" ]; then
               echo "::group::$d tests"
               # sscbirrt is its own project; its test dependencies are its extras.
-              extras=""; [ "$d" = sscbirrt ] && extras="--all-extras"
+              # prl_assets' (scipy among them) are its dev extra, which the root sync doesn't install.
+              extras=""; [ "$d" = sscbirrt ] && extras="--all-extras"; [ "$d" = prl_assets ] && extras="--extra dev"
               (cd "$d" && uv run $extras pytest tests/ -q) || fail=1
               echo "::endgroup::"
             fi
