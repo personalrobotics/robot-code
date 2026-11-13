@@ -11,11 +11,12 @@ override-dependencies = ["labmaze ; sys_platform == 'never'"]
 # mj_manipulator and mj_manipulator_ros are retired (personalrobotics/mj_manipulator#182).
 # ada_assets is not a member either: nothing here uses it, ada_mj pins it by commit, and
 # its own dev dependencies (sstsr 4.2) differ from this workspace's.
+# sscbirrt is not a member: only mj_manipulator built against its source; geodude and
+# ada_mj take it from PyPI. Its tests run as its own project, with its extras.
 members = [
     "asset_manager",
     "geodude_assets",
     "mj_environment",
     "mj_viser",
     "prl_assets",
-    "sscbirrt",
 ]

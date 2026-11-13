@@ -91,7 +91,9 @@ jobs:
           for d in ada_assets ada_mj asset_manager geodude geodude_assets mj_environment mj_viser prl_assets sscbirrt tsr; do
             if [ -d "$d/tests" ]; then
               echo "::group::$d tests"
-              (cd "$d" && uv run pytest tests/ -q) || fail=1
+              # sscbirrt is its own project; its test dependencies are its extras.
+              extras=""; [ "$d" = sscbirrt ] && extras="--all-extras"
+              (cd "$d" && uv run $extras pytest tests/ -q) || fail=1
               echo "::endgroup::"
             fi
           done
@@ -102,8 +104,8 @@ jobs:
 
       - name: Import smoke check
         run: |
-          # geodude, ada_mj and ada_assets have their own environments; their tests above run in them.
-          uv run python -c "import asset_manager, geodude_assets, mj_environment, mj_viser, prl_assets, sscbirrt, tsr; print('all imports OK')"
+          # geodude, ada_mj, ada_assets and sscbirrt are their own projects; their tests above run in them.
+          uv run python -c "import asset_manager, geodude_assets, mj_environment, mj_viser, prl_assets; print('all imports OK')"
 
   notify-on-nightly-failure:
     needs: [integration, gitlink-freshness]

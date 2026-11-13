@@ -59,12 +59,13 @@ echo ""
 echo "==> Removing stale per-package venvs (workspace uses shared root .venv)..."
 # `uv run` inside a workspace member with its own .venv ignores the shared
 # workspace venv, which is a common silent footgun. See robot-code#62.
-# geodude, ada_mj and ada_assets are not members: each .venv is its own environment, so it stays.
+# geodude, ada_mj, ada_assets and sscbirrt are not members: each .venv is its own environment, so it stays.
 shopt -s nullglob
 for d in */.venv; do
     [ "$d" = "geodude/.venv" ] && continue
     [ "$d" = "ada_mj/.venv" ] && continue
     [ "$d" = "ada_assets/.venv" ] && continue
+    [ "$d" = "sscbirrt/.venv" ] && continue
     echo "    removing $d"
     rm -rf "$d"
 done
