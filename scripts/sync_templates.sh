@@ -4,7 +4,7 @@
 # Usage:
 #   scripts/sync_templates.sh --dry-run              # show what would change (all repos)
 #   scripts/sync_templates.sh --apply                # apply to all repos
-#   scripts/sync_templates.sh --apply --repo=sstsr   # apply to one repo
+#   scripts/sync_templates.sh --apply --repo=sscbirrt # apply to one repo
 #
 # The script copies files from .github-templates/ to each sibling. It does NOT
 # touch each sibling's pyproject.toml, README, LICENSE text, or source headers
@@ -22,8 +22,9 @@ SIBLINGS=(
     mj_viser
     prl_assets
     sscbirrt
-    sstsr
 )
+# Not sstsr: it keeps its own BSD-2-Clause LICENSE and its own CI (C++ jobs, pinned
+# actions), which these templates would overwrite.
 
 # Files to copy from .github-templates/ into each sibling (src -> dst).
 # Left column is the path under .github-templates/; right column is the

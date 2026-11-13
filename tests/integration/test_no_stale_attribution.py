@@ -38,8 +38,8 @@ def test_no_banned_attribution() -> None:
     hits: list[str] = []
     for sibling in SIBLING_DIRS:
         sib_dir = root / sibling
-        if not sib_dir.is_dir():
-            continue
+        # setup.sh clones every one, so a missing directory is a stale name, not a skip (#204).
+        assert sib_dir.is_dir(), f"{sibling}/ is not cloned: rename or remove it here"
         for path in sib_dir.rglob("*"):
             if not path.is_file() or path.suffix not in TEXT_SUFFIXES:
                 continue
