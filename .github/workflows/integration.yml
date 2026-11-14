@@ -37,6 +37,8 @@ jobs:
           ./scripts/check_gitlink_freshness.sh
 
   integration:
+    # A dispatch from a repository that isn't a workspace member has nothing to test here.
+    if: github.event_name != 'repository_dispatch' || contains(fromJSON('["asset_manager", "geodude_assets", "mj_environment", "mj_viser", "prl_assets"]'), github.event.client_payload.repo)
     runs-on: ubuntu-latest
     timeout-minutes: 45
     strategy:
@@ -88,12 +90,14 @@ jobs:
         run: |
           set +e
           fail=0
-          for d in ada_assets ada_mj asset_manager geodude geodude_assets mj_environment mj_viser prl_assets sscbirrt tsr; do
+          # Only the workspace members: they share the root environment, which their own CI
+          # doesn't test. geodude, ada_mj, ada_assets, sscbirrt and sstsr are their own
+          # projects with their own locks, so their own CI already runs these suites.
+          for d in asset_manager geodude_assets mj_environment mj_viser prl_assets; do
             if [ -d "$d/tests" ]; then
               echo "::group::$d tests"
-              # sscbirrt is its own project; its test dependencies are its extras.
-              # prl_assets' (scipy among them) are its dev extra, which the root sync doesn't install.
-              extras=""; [ "$d" = sscbirrt ] && extras="--all-extras"; [ "$d" = prl_assets ] && extras="--extra dev"
+              # prl_assets' test dependencies (scipy among them) are its dev extra, which the root sync doesn't install.
+              extras=""; [ "$d" = prl_assets ] && extras="--extra dev"
               (cd "$d" && uv run $extras pytest tests/ -q) || fail=1
               echo "::endgroup::"
             fi
@@ -105,7 +109,7 @@ jobs:
 
       - name: Import smoke check
         run: |
-          # geodude, ada_mj, ada_assets and sscbirrt are their own projects; their tests above run in them.
+          # geodude, ada_mj, ada_assets and sscbirrt are their own projects, tested by their own CI.
           uv run python -c "import asset_manager, geodude_assets, mj_environment, mj_viser, prl_assets; print('all imports OK')"
 
   notify-on-nightly-failure:
