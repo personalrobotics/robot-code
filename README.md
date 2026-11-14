@@ -52,6 +52,10 @@ its README maps each capability to its successor.
 | [mj_viser](https://github.com/personalrobotics/mj_viser) | Web-based MuJoCo viewer built on Viser |
 | [geodude_assets](https://github.com/personalrobotics/geodude_assets) | MuJoCo models for Geodude (UR5e + Robotiq 2F-140) |
 
+## Conventions
+
+- [MuJoCo group conventions](docs/mujoco-groups.md): which geom and site groups hold visuals, collision geometry, task frames, and engineering frames, in every asset model. Checked by `scripts/check_mujoco_groups.py`.
+
 ## Development
 
 ```bash
